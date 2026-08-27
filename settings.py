@@ -14,5 +14,3 @@ pygame.display.set_caption("marvel-fighter")
 
 #base directory
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-
-
