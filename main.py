@@ -31,6 +31,8 @@ FPS = 60
 running = True
 is_fullscreen = False
 
+map1 = Map("map1", 12)
+
 #main game loop
 while running:
 
@@ -53,10 +55,8 @@ while running:
                 else:
                     screen = pygame.display.set_mode((GAME_WIDTH, GAME_HEIGHT), pygame.RESIZABLE)
 
-    #display map
-    game_surface.blit(map1, (0, 0))
-
     #update display
+    map1.update()
     scale_game()
     pygame.display.update()
 
