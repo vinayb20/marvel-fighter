@@ -1,9 +1,11 @@
 #imports
 import pygame
 import os
+import settings
 from settings import *
 from maps import *
 from sprites import *
+from gui import * 
 
 #fullscreen function
 def scale_game():
@@ -20,6 +22,10 @@ def scale_game():
     x_offset = (screen_width - scaled_width) // 2
     y_offset = (screen_height - scaled_height) // 2
 
+    settings.scale = scale
+    settings.x_offset = x_offset
+    settings.y_offset = y_offset
+
     screen.fill((0, 0, 0))
     screen.blit(scaled_surface, (x_offset, y_offset))
 
@@ -30,6 +36,7 @@ FPS = 60
 #define essential game settings
 running = True
 is_fullscreen = False
+game_state = "menu"
 
 #main game loop
 while running:
@@ -38,9 +45,10 @@ while running:
     dt = clock.tick(FPS) / 1000
 
     #check for events
-    for event in pygame.event.get():
+    events = pygame.event.get()
+    for event in events:
 
-        #closing game
+        #closing game if x
         if event.type == pygame.QUIT:
             running = False
 
@@ -53,8 +61,21 @@ while running:
                 else:
                     screen = pygame.display.set_mode((GAME_WIDTH, GAME_HEIGHT), pygame.RESIZABLE)
 
+    #game states
+    if game_state == "menu":
+        map4.update()
+        menu_action = main_menu(events)
+        if menu_action == "quit":
+            running = False
+        elif menu_action == "play":
+            game_state = "map_select"
+
+    elif game_state == "map_select":
+        map4.update()
+    elif game_state == "start":
+        map4.update()
+
     #update display
-    map4.update()
     scale_game()
     pygame.display.update()
 
