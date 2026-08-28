@@ -43,6 +43,8 @@ map_2_menu_pos = (365, 200)
 map_3_menu_pos = (665, 200)
 map_4_menu_pos = (965, 200)
 
+map_selection = ""
+
 #sprite selection menu settings
 sprite_menu_width, sprite_menu_height = 768/3, 480/3
 sprite_1_menu_pos = (65, 200)
@@ -56,6 +58,9 @@ captainAmerica_selected = False
 wolverine_selected = False
 
 selected_count = 0
+
+p1 = ""
+p2 = ""
 
 #select input
 game_input = ""

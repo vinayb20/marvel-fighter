@@ -96,17 +96,21 @@ def maps(events):
         if event.type == pygame.MOUSEBUTTONDOWN:
             mouse_pos = get_game_mouse_pos()
             if map1_button.collidepoint(mouse_pos):
+                settings.map_selection = "map1"
                 return "map1"
             elif map2_button.collidepoint(mouse_pos):
+                settings.map_selection = "map2"
                 return "map2"
             elif map3_button.collidepoint(mouse_pos):
+                settings.map_selection = "map3"
                 return "map3"
             elif map4_button.collidepoint(mouse_pos):
+                settings.map_selection = "map4"
                 return "map4"
 
     return None
 
-def draw_sprite_selection_button(x, y, selected, padding=2):
+def draw_hero_selection_button(x, y, selected, padding=2):
     button_rect = pygame.Rect(x - padding, y - padding, map_menu_width + (padding*2), map_menu_height + (padding*2))
 
     drawing_box_col = WHITE
@@ -129,33 +133,55 @@ def hero_select(events):
     draw_text("SELECT A HERO", pressStart2P_font_for_map_menu, WHITE, 450, 152)
 
     game_surface.blit(spiderman_menu, sprite_1_menu_pos)
-    spiderman_button = draw_sprite_selection_button(sprite_1_menu_pos[0], sprite_1_menu_pos[1], settings.spiderman_selected)
+    spiderman_button = draw_hero_selection_button(sprite_1_menu_pos[0], sprite_1_menu_pos[1], settings.spiderman_selected)
 
     game_surface.blit(ironman_menu, sprite_2_menu_pos)
-    ironman_button = draw_sprite_selection_button(sprite_2_menu_pos[0], sprite_2_menu_pos[1], settings.ironman_selected)
+    ironman_button = draw_hero_selection_button(sprite_2_menu_pos[0], sprite_2_menu_pos[1], settings.ironman_selected)
 
     game_surface.blit(captainAmerica_menu, sprite_3_menu_pos)
-    captainAmerica_button = draw_sprite_selection_button(sprite_3_menu_pos[0], sprite_3_menu_pos[1], settings.captainAmerica_selected)
+    captainAmerica_button = draw_hero_selection_button(sprite_3_menu_pos[0], sprite_3_menu_pos[1], settings.captainAmerica_selected)
 
     game_surface.blit(wolverine_menu, sprite_4_menu_pos)
-    wolverine_button = draw_sprite_selection_button(sprite_4_menu_pos[0], sprite_4_menu_pos[1], settings.wolverine_selected)
+    wolverine_button = draw_hero_selection_button(sprite_4_menu_pos[0], sprite_4_menu_pos[1], settings.wolverine_selected)
 
     if settings.selected_count < 2:
         for event in events:
+
             if event.type == pygame.MOUSEBUTTONDOWN:
                 mouse_pos = get_game_mouse_pos()
+
                 if spiderman_button.collidepoint(mouse_pos):
                     settings.spiderman_selected = True
                     settings.selected_count += 1
+                    if settings.selected_count == 1:
+                        settings.p1 = "spiderman"
+                    elif settings.selected_count == 2:
+                        settings.p2 = "spiderman"
+
                 elif ironman_button.collidepoint(mouse_pos):
                     settings.ironman_selected = True
                     settings.selected_count += 1
+                    if settings.selected_count == 1:
+                        settings.p1 = "ironman"
+                    elif settings.selected_count == 2:
+                        settings.p2 = "ironman"
+
                 elif captainAmerica_button.collidepoint(mouse_pos):
                     settings.captainAmerica_selected = True
                     settings.selected_count += 1
+                    if settings.selected_count == 1:
+                        settings.p1 = "captainAmerica"
+                    elif settings.selected_count == 2:
+                        settings.p2 = "captainAmerica"
+
                 elif wolverine_button.collidepoint(mouse_pos):
                     settings.wolverine_selected = True
                     settings.selected_count += 1
+                    if settings.selected_count == 1:
+                        settings.p1 = "wolverine"
+                    elif settings.selected_count == 2:
+                        settings.p2 = "wolverine"
+
     #select input menu
     else:
         draw_text("SELECT AN INPUT", pressStart2P_font_for_input_menu, WHITE, 380, 410)

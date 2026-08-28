@@ -91,7 +91,14 @@ while running:
             game_state = menu_action
     
     elif game_state == "game":
-        map4.update()
+        if settings.map_selection == "map1":
+            map1.update()
+        if settings.map_selection == "map2":
+            map2.update()
+        if settings.map_selection == "map3":
+            map3.update()
+        if settings.map_selection == "map4":
+            map4.update()
 
     #update display
     scale_game()
