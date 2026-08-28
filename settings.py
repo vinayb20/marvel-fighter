@@ -23,6 +23,7 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 #fonts
 pressStart2P_font = pygame.font.Font(os.path.join(BASE_DIR, "assets", "fonts", "PressStart2P-Regular.ttf"), 80)
 pressStart2P_font_for_map_menu = pygame.font.Font(os.path.join(BASE_DIR, "assets", "fonts", "PressStart2P-Regular.ttf"), 30)
+pressStart2P_font_for_input_menu = pygame.font.Font(os.path.join(BASE_DIR, "assets", "fonts", "PressStart2P-Regular.ttf"), 37)
 publicPixel_font = pygame.font.Font(os.path.join(BASE_DIR, "assets", "fonts", "PublicPixel.ttf"), 50)
 blox2_font = pygame.font.Font(os.path.join(BASE_DIR, "assets", "fonts", "blox2.ttf"), 25)
 
@@ -55,3 +56,6 @@ captainAmerica_selected = False
 wolverine_selected = False
 
 selected_count = 0
+
+#select input
+game_input = ""

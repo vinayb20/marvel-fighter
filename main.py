@@ -87,8 +87,10 @@ while running:
             map4.update()
 
         menu_action = hero_select(events)
+        if menu_action is not None:
+            game_state = menu_action
     
-    elif game_state == "start":
+    elif game_state == "game":
         map4.update()
 
     #update display

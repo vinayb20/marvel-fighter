@@ -46,18 +46,6 @@ def draw_rect(button, text, font, text_col, box_col, x, y, padding):
     draw_text(text, font, text_col, x, y)
 
     return button_rect
-
-def draw_map_button(x, y, padding=2):
-    button_rect = pygame.Rect(x - padding, y - padding, map_menu_width + (padding*2), map_menu_height + (padding*2))
-    
-    mouse_pos = get_game_mouse_pos()
-    if button_rect.collidepoint(mouse_pos):
-        drawing_box_col = RED
-    else:
-        drawing_box_col = WHITE
-
-    pygame.draw.rect(game_surface, drawing_box_col, button_rect, 5)
-    return button_rect
     
 def main_menu(events):
     draw_text("MAIN MENU", pressStart2P_font, YELLOW, 280, 60)
@@ -74,6 +62,18 @@ def main_menu(events):
                 return "play"
 
     return None
+
+def draw_map_button(x, y, padding=2):
+    button_rect = pygame.Rect(x - padding, y - padding, map_menu_width + (padding*2), map_menu_height + (padding*2))
+    
+    mouse_pos = get_game_mouse_pos()
+    if button_rect.collidepoint(mouse_pos):
+        drawing_box_col = RED
+    else:
+        drawing_box_col = WHITE
+
+    pygame.draw.rect(game_surface, drawing_box_col, button_rect, 5)
+    return button_rect
 
 def maps(events):
     draw_text("MAIN MENU", pressStart2P_font, YELLOW, 280, 60)
@@ -156,3 +156,21 @@ def hero_select(events):
                 elif wolverine_button.collidepoint(mouse_pos):
                     settings.wolverine_selected = True
                     settings.selected_count += 1
+    #select input menu
+    else:
+        draw_text("SELECT AN INPUT", pressStart2P_font_for_input_menu, WHITE, 380, 410)
+
+        keyboard_rect = draw_rect(True, "KEYBOARD", publicPixel_font, WHITE, DARKGREY, 450, 485, 20)
+        controller_rect = draw_rect(True, "CONTROLLER", publicPixel_font, WHITE, DARKGREY, 400, 585, 20)
+
+        for event in events:
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                mouse_pos = get_game_mouse_pos()
+                if keyboard_rect.collidepoint(mouse_pos):
+                    settings.game_input = "keyboard"
+                    return "game"
+                if controller_rect.collidepoint(mouse_pos):
+                    settings.game_input = "controller"
+                    return "game"
+        
+        return None
