@@ -72,6 +72,22 @@ while running:
 
     elif game_state == "map_select":
         map4.update()
+        menu_action = maps(events)
+        if menu_action is not None:
+            game_state = menu_action
+
+    elif game_state == "map1" or game_state == "map2" or game_state == "map3" or game_state == "map4":
+        if game_state == "map1":
+            map1.update()
+        elif game_state == "map2":
+            map2.update()
+        elif game_state == "map3":
+            map3.update()
+        elif game_state == "map4":
+            map4.update()
+
+        menu_action = hero_select(events)
+    
     elif game_state == "start":
         map4.update()
 

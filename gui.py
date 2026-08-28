@@ -1,6 +1,7 @@
 import pygame
 import settings
 from settings import *
+from maps import *
 
 def draw_text(text, font, text_col, x, y):
     img = font.render(text, True, text_col)
@@ -31,6 +32,18 @@ def draw_rect(button, text, font, text_col, box_col, x, y, padding):
     draw_text(text, font, text_col, x, y)
 
     return button_rect
+
+def draw_map_button(x, y, padding=2):
+    button_rect = pygame.Rect(x - padding, y - padding, map_menu_width + (padding*2), map_menu_height + (padding*2))
+    
+    mouse_pos = get_game_mouse_pos()
+    if button_rect.collidepoint(mouse_pos):
+        drawing_box_col = RED
+    else:
+        drawing_box_col = WHITE
+
+    pygame.draw.rect(game_surface, drawing_box_col, button_rect, 5)
+    return button_rect
     
 def main_menu(events):
     draw_text("MAIN MENU", pressStart2P_font, YELLOW, 280, 60)
@@ -47,3 +60,37 @@ def main_menu(events):
                 return "play"
 
     return None
+
+def maps(events):
+    draw_text("MAIN MENU", pressStart2P_font, YELLOW, 280, 60)
+    draw_text("SELECT A MAP", pressStart2P_font_for_map_menu, WHITE, 450, 152)
+
+    map1_menu.update()
+    map1_button = draw_map_button(map_1_menu_pos[0], map_1_menu_pos[1])
+
+    map2_menu.update()
+    map2_button = draw_map_button(map_2_menu_pos[0], map_2_menu_pos[1])
+
+    map3_menu.update()
+    map3_button = draw_map_button(map_3_menu_pos[0], map_3_menu_pos[1])
+
+    map4_menu.update()
+    map4_button = draw_map_button(map_4_menu_pos[0], map_4_menu_pos[1])
+
+    for event in events:
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            mouse_pos = get_game_mouse_pos()
+            if map1_button.collidepoint(mouse_pos):
+                return "map1"
+            elif map2_button.collidepoint(mouse_pos):
+                return "map2"
+            elif map3_button.collidepoint(mouse_pos):
+                return "map3"
+            elif map4_button.collidepoint(mouse_pos):
+                return "map4"
+
+    return None
+
+def hero_select(events):
+    draw_text("MAIN MENU", pressStart2P_font, YELLOW, 280, 60)
+    draw_text("SELECT A HERO", pressStart2P_font_for_map_menu, WHITE, 450, 152)
