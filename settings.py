@@ -35,9 +35,23 @@ BLACK = (0, 0, 0)
 BLUE = (0, 120, 160)
 GREEN = (0, 255, 0)
 
-#map menu
+#map menu settings
 map_menu_width, map_menu_height = 768/3, 480/3
 map_1_menu_pos = (65, 200)
 map_2_menu_pos = (365, 200)
 map_3_menu_pos = (665, 200)
 map_4_menu_pos = (965, 200)
+
+#sprite selection menu settings
+sprite_menu_width, sprite_menu_height = 768/3, 480/3
+sprite_1_menu_pos = (65, 200)
+sprite_2_menu_pos = (365, 200)
+sprite_3_menu_pos = (665, 200)
+sprite_4_menu_pos = (965, 200)
+
+spiderman_selected = False
+ironman_selected = False
+captainAmerica_selected = False
+wolverine_selected = False
+
+selected_count = 0

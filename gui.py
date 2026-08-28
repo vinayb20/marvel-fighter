@@ -1,7 +1,21 @@
+#imports
 import pygame
 import settings
 from settings import *
 from maps import *
+
+#load sprite menu selection images
+spiderman_menu = pygame.image.load(os.path.join(BASE_DIR, "assets", "sprites", "images", "spiderman.jpeg"))
+spiderman_menu = pygame.transform.scale(spiderman_menu, (sprite_menu_width, sprite_menu_height))
+
+ironman_menu = pygame.image.load(os.path.join(BASE_DIR, "assets", "sprites", "images", "ironman.jpeg"))
+ironman_menu = pygame.transform.scale(ironman_menu, (sprite_menu_width, sprite_menu_height))
+
+wolverine_menu = pygame.image.load(os.path.join(BASE_DIR, "assets", "sprites", "images", "wolverine.jpeg"))
+wolverine_menu = pygame.transform.scale(wolverine_menu, (sprite_menu_width, sprite_menu_height))
+
+captainAmerica_menu = pygame.image.load(os.path.join(BASE_DIR, "assets", "sprites", "images", "captainamerica.jpeg"))
+captainAmerica_menu = pygame.transform.scale(captainAmerica_menu, (sprite_menu_width, sprite_menu_height))
 
 def draw_text(text, font, text_col, x, y):
     img = font.render(text, True, text_col)
@@ -92,6 +106,53 @@ def maps(events):
 
     return None
 
+def draw_sprite_selection_button(x, y, selected, padding=2):
+    button_rect = pygame.Rect(x - padding, y - padding, map_menu_width + (padding*2), map_menu_height + (padding*2))
+
+    drawing_box_col = WHITE
+
+    if not selected and settings.selected_count < 2:   
+        mouse_pos = get_game_mouse_pos()
+        if button_rect.collidepoint(mouse_pos):
+            drawing_box_col = RED
+        else:
+            drawing_box_col = WHITE
+
+    if selected:
+        drawing_box_col = GREEN
+
+    pygame.draw.rect(game_surface, drawing_box_col, button_rect, 5)
+    return button_rect
+
 def hero_select(events):
     draw_text("MAIN MENU", pressStart2P_font, YELLOW, 280, 60)
     draw_text("SELECT A HERO", pressStart2P_font_for_map_menu, WHITE, 450, 152)
+
+    game_surface.blit(spiderman_menu, sprite_1_menu_pos)
+    spiderman_button = draw_sprite_selection_button(sprite_1_menu_pos[0], sprite_1_menu_pos[1], settings.spiderman_selected)
+
+    game_surface.blit(ironman_menu, sprite_2_menu_pos)
+    ironman_button = draw_sprite_selection_button(sprite_2_menu_pos[0], sprite_2_menu_pos[1], settings.ironman_selected)
+
+    game_surface.blit(captainAmerica_menu, sprite_3_menu_pos)
+    captainAmerica_button = draw_sprite_selection_button(sprite_3_menu_pos[0], sprite_3_menu_pos[1], settings.captainAmerica_selected)
+
+    game_surface.blit(wolverine_menu, sprite_4_menu_pos)
+    wolverine_button = draw_sprite_selection_button(sprite_4_menu_pos[0], sprite_4_menu_pos[1], settings.wolverine_selected)
+
+    if settings.selected_count < 2:
+        for event in events:
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                mouse_pos = get_game_mouse_pos()
+                if spiderman_button.collidepoint(mouse_pos):
+                    settings.spiderman_selected = True
+                    settings.selected_count += 1
+                elif ironman_button.collidepoint(mouse_pos):
+                    settings.ironman_selected = True
+                    settings.selected_count += 1
+                elif captainAmerica_button.collidepoint(mouse_pos):
+                    settings.captainAmerica_selected = True
+                    settings.selected_count += 1
+                elif wolverine_button.collidepoint(mouse_pos):
+                    settings.wolverine_selected = True
+                    settings.selected_count += 1
