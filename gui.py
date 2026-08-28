@@ -64,6 +64,7 @@ def main_menu(events):
 def maps(events):
     draw_text("MAIN MENU", pressStart2P_font, YELLOW, 280, 60)
     draw_text("SELECT A MAP", pressStart2P_font_for_map_menu, WHITE, 450, 152)
+    full_screen_rect = draw_rect(False, "PRESS F TO TOGGLE FULLSCREEN", blox2_font, BLACK, BLUE, 920, 660, 5)
 
     map1_menu.update()
     map1_button = draw_map_button(map_1_menu_pos[0], map_1_menu_pos[1])
